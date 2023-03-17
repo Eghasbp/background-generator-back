@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="div1">the text above has been created dynamically</div>
+
+    <ul id="myList">
+        <li>coffee</li>
+        <li>Tea</li>
+    </ul>
+    <button onclick="myFunction()">Try Me</button>
+
+    <p class="myP">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Labore temporibus iste beatae. At facilis, corrupti autem possimus eos harum expedita animi nemo necessitatibus perferendis optio, accusamus enim minima dolorum. Explicabo?</p>
+    <button onclick="functionP()">P</button>
+
+    <h2>javascript addEventListener()</h2>
+    <button id="myBtn">Try It</button>
+    
+    <p id="window"></p>
+
+     <script>
+        document.body.onload= addElement;
+        function addElement() {
+            const newDiv =document.createElement('div');
+            const newContent =document.createTextNode('hallo greetings');
+            newDiv.appendChild(newContent);
+            const currentDiv = document.getElementById('div1');
+            document.body.insertBefore(newDiv,currentDiv.nextSibling);
+        }
+
+        function myFunction() {
+            let node = document.createElement('li');
+            let textNode =document.createTextNode('Water');
+            node.appendChild(textNode);
+            document.getElementById('myList').appendChild(node)
+        }
+
+        function functionP() {
+            document.getElementsByClassName('myP')[0].style.backgroundColor = 'red';
+            document.getElementsByClassName('myP')[0].style.color = 'white';
+            document.getElementsByClassName('myP')[0].style.padding = '20px 10px';
+        }
+
+        let x = document.getElementById('myBtn');
+        x.addEventListener('click', myFunction2);
+        x.addEventListener('click', myFunction3);
+        function myFunction2() {
+            alert('EventListener');
+        }
+        function myFunction3() {
+           console.log('ini fungsi ke-2');
+        }
+
+        window.addEventListener('resize', function(){
+            document.getElementById('window').innerHTML = Math.random();
+        })
+
+        const buah= ['apel','jeruk','leci','lemon'];
+        console.log(buah.toString())
+        console.log(buah.join(' -'))
+        console.log(buah.pop())
+        console.log(buah)
+        console.log(buah.push('pisang'))
+        console.log(buah)
+        console.log(buah.shift())
+        console.log(buah)
+        console.log(buah.unshift('alpukat'))
+        console.log(buah)
+        buah[1] = 'anggur';
+        console.log(buah)
+        buah.splice(2,0,'kiwi','tomat') //ada juga slice()
+        buah.sort() // untuk urutin by abjad // ada juga reverse()
+        console.log(buah)
+
+        const myboy =['A','B']
+        const mygirls = ['C','D','E']
+        const myChildren = myboy.concat(mygirls)
+        console.log(myChildren)
+
+        const angka =[200,99,30,100,50,2,9,7,80];
+        angka.sort(function(a,b) {return a-b})
+        console.log(angka)
+
+        const cars = [
+            {type:'volvo', year:2006},
+            {type:'BMW', year:2010},
+            {type:'audi', year:2001}
+        ]
+
+        console.log(cars.sort(function(a,b) {return a.year-b.year}))
+////////////////////////////////////////////////////////////////
+        const angka2 =[200,99,30,100,50,2,9,7,80];
+        let baru = angka2.map(functionbaru);
+        // angka2.forEach(functionbaru);
+        function functionbaru(value, index, array) {
+            console.log(value)
+        }
+    ////////////////////////////////////    
+        const angka3= [1,3,5,8,31]
+        let newangka3 = [];
+    ///////////////////////////////////////
+        angka3.forEach(i => newangka3.push(i * 2)) 
+        console.log(newangka3)
+    ///////////////////////////////////
+
+        let filterr = angka3.filter((i) =>  i>=5 )
+        console.log(filterr)
+    ///////////////////////////////////////
+
+    const d = new Date ()
+    // (2023, 0, 10, 22,15,0,0)
+    console.log(d.toUTCString())
+    console.log(d.toDateString())
+    console.log(d.toISOString())
+
+    //ada juga syntax every() dan some() untuk memeriksa value, returnnya boolean
+    //ada juga indexOf() dan find() yang    mengembalikan nilai
+    // search()/ match()/ test() untuk mencari value dalam strings 
+    // untuk search bisa di tambahkan regular expression modifier. yaitu 
+    // i = untuk incase sensitif, g = global match(untuk mencari multiple value), dan m = untuk multiline match
+        
+    ///////////////////////////////////////
+
+    const checkAge = (x) => {
+        if (checkAge <= 17) {
+            return false
+        } return true;
+    }
+    
+    console.log(checkAge(18))
+    /////////////////////////////////
+    //spread syntax
+
+    let numbers =[3,4]
+    let additionalNumbers = [1,2,...numbers,5,6];
+
+    console.log(additionalNumbers)
+
+    function sumThree(a,b,c){
+        return a+b+c
+    }
+
+    const threeNumber = [12,13,14]
+    console.log(sumThree(...threeNumber))
+
+    const obj1 = {
+        firstName : "Ega",
+        lastName : "Yudhistira"
+    }
+    
+    const obj2 = {birthdate: "7 Maret 1997"}
+    const obj3 ={ ...obj1, ...obj2}
+    console.log(obj3)   
+
+    //////////////////////////////////////////////////////
+    const numberss = [100,200,300]; //bisa juga pake string ='abcd';
+    const objek = {
+        firstName : "Ega",
+        lastName : "Yudhistira"
+    }
+    
+    for (const num of numberss) //kalau for in untuk object dengan mengambil value kalau digunakan untuk array dia balikin index
+        {console.log(num)}
+        
+    for (const datadiri in objek) 
+        {console.log(objek[datadiri ])}
+        
+        // for of lebih ke array/strings
+        //for in lebih ke object
+        ///////////////////////////////////////////////
+
+        //Higher order funtion (reduce,map,filter,currying)
+
+    //     function sum (nums) {
+    //         let awal = 0;
+    //         const output = nums.reduce((prev,current) => {
+    //             console.log(prev)
+    //             return prev+current
+    //     },awal)
+    //     }
+    
+    
+    // const angkaFP = [1,2,3,4,5];
+    // const totalsum = sum(angkaFP)
+    //     console.log(totalsum)
+         
+    const murid = [
+        {nama:'Ega', umur : 25 }, 
+        {nama:'Yudhistira', umur:25} , 
+        {nama:'Adam', umur:99} , 
+        {nama:'Hawa', umur:99 }, 
+    ]
+
+    const dataMurid = murid.filter(mrd => mrd.umur < 26);
+    console.log(dataMurid)
+
+    const dataMurid2 = murid.map(mrd => mrd.umur * 2)
+    console.log(dataMurid2)
+    
+    const dataMurid3 = murid.map((mrd) => `${mrd.nama} berusia ${mrd.umur}`)
+    console.log(dataMurid3)
+        
+
+    const students = [
+        {nama:'Ega', umur : 25 }, 
+        {nama:'Yudhistira', umur:25} ,  
+        {nama:'Adam', umur:99} , 
+        {nama:'Hawa', umur:99 }, 
+    ]
+
+    const sumAges =students.reduce ((prev,current) => prev + current.umur,0);
+    const average =sumAges /students.length;
+    console.log(average)
+        
+    
+    const multiply = (a,b) => a*b;
+        console.log(multiply(2,3))
+
+    const curriedmultiply = (a) => (b) => a*b;
+    console.log(curriedmultiply(3)(3)) 
+      //contoh lain
+      
+    const generateURL = (protocol) => (hostname) => (page) => `${protocol}${hostname}${page} `;
+    
+    const httpmyskill = generateURL('https://')('www.myskill.id/');
+    const login = generateURL('/login');
+    const course = generateURL('/course');
+    const about = generateURL('/about');
+        
+     //destructuring (assigmnet) untuk array dan object
+        // const hobbies = ['makan','tidur','musik'];
+        // const [first,second,third] = hobbies;
+
+        //disederhanakan jadi 
+        const [first,second,third,fourth ='default'] = ['makan','tidur','musik'];
+        
+        console.log(first)
+
+        const {name: carName,manufacture,speed} ={
+            name: 'civic',
+            manufacture:'honda', 
+            speed:'180kmph'
+        }
+
+        console.log(manufacture,carName,' =',speed)
+        /////////////////////////////////
+        //constructor
+
+        function Person(name,age){
+                this.name =name,
+                this.age =age
+        }
+
+        const orang1= new Person ('Ega',25);
+        const orang2= new Person ('Yudhistira');
+
+        orang2.age =20;
+        console.log(orang2)
+        console.log(orang1)
+        
+        const Persons = (newName,newAge) => {
+            this.name = newName;
+            this.age = newAge;
+            return {
+                name: this.name,
+                age: this.age
+            };
+        }
+        
+        const xx = Persons("Egga",20)
+        console.log(xx.name + xx.age)
+        
+        const People =() => {
+            this.name = 'Ega'
+            return {
+                name:this.name
+            }
+        } 
+
+        const nama = People()
+        console.log(nama.name)
+
+        ////  class
+
+        class Persona {
+            constructor(newName,newAge){
+                this.name = newName
+                this.age = newAge
+            }
+        }
+
+        const p = new Persona('Ega', 25)
+        console.log(p)
+
+        /////////class methode
+
+        class Orangs {
+            constructor(name){
+                this.name = name;
+                this.age = this.randomize()
+            }
+            randomize() {
+                return Math.floor(Math.random(100) * 100)
+            }
+        }
+        
+        
+        const p123 = new Orangs('You')
+        console.log(p123.age) 
+        console.log(p123.randomize())
+
+        //menggunakan static : tidak perlu pake new: digunakan di luar scope
+        //menggunakan methode yang dimiliki oleh class
+        
+        class Something {
+            static randomize() {
+                return Math.random(100) *100
+            }
+
+            static log(str) {
+                console.log(str)
+            }
+        }
+
+        Something.log(Something.randomize())
+
+        //getter 
+        class Ppl {
+            #relationship
+            constructor(name,age,gender){
+                this.name = name;
+                this.age = age
+                this.gender = gender
+                this.#relationship ='in shambles'
+            }
+            get getName() { // kalau tanpa get bisa cuma invoked, harus di bikin kurung pas manggil
+        //   getName() { 
+                return ((this.gender === 'L' ? 'halo tuan ':'halo nyonya ')+this.name)
+            }
+            set setName(changedName){
+                this.name=changedName
+            }
+            get getRelationship() {
+                return this.#relationship
+            }
+            getRelation() {
+                return this.#relationship
+            }
+    
+    
+        }
+
+        const h = new Ppl('Ega', 25,'L')
+        const i = new Ppl('Dwi', 25,'P')
+        // console.log(h.getName()) kalau gapake pake get gini 
+        console.log(h.getName)
+        console.log(i.getName)
+
+        ///setter/// untuk mengubah nilai variable (code ikut yg atas)
+        h.setName = "Yudhistira"
+        console.log(h.getName)
+
+        //public and private property// cara aksesnya pake getter atau pake invoked ()
+        console.log(h.getRelationship)
+        console.log(h.getRelation())
+
+
+        //encapsulation supaya value tidak dapat di ubah sembarangan orang
+        class Ongkir {
+            #pajak
+            constructor(weight){
+                this.#pajak = 1000
+                this.biaya = this.calculateWeight(weight)
+            }
+            calculateWeight(weight) {
+                return weight * 2000;
+            }
+            get totalHarga() {
+                return this.#pajak + this.biaya
+            }
+        }
+
+        const ongkir = new Ongkir(20);
+        console.log(ongkir.totalHarga)
+        ongkir.pajak = 5000 // kalau gapake encapsulation maka orang bisa bebas ganti2 value pajak ini
+        console.log(ongkir.totalHarga)
+
+        //inheritance
+        class Peopler {
+            constructor(name,age){
+                this.name = name
+                this.age = age
+                this.job = 'jobless'
+            }
+
+            get getJob(){
+                return this.job
+            }
+        }
+
+        class PersonWithJob extends Peopler {
+            constructor(name,age,job){
+                super(name,age)
+                this.job =job
+            }
+        }
+
+        const you = new Peopler('you', 65)
+        const mih = new PersonWithJob('Me',25,'software Engineer')
+        console.log(you.getJob)
+        console.log(mih.getJob)
+
+
+    class Indonesian {
+        constructor(name){
+            this.name = name
+        }
+        greeting() {
+            return `Halo nama saya ${this.name}`
+        }
+    }
+
+    class English extends Indonesian {
+        constructor(name){
+            super(name)
+        }
+        greeting() {
+            return `Hi my name is ${this.name}`
+        }
+    }
+
+    const indonesian = new Indonesian('Ega')
+    const english = new English('yudhistira')
+    console.log(indonesian.greeting())
+    console.log(english.greeting())
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        </script>
+
+        
+</body>
+</html>
