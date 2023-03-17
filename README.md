@@ -1,1 +1,1 @@
-# background-generator-back
+# Just for learning - my first journey
